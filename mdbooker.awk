@@ -1,8 +1,11 @@
 BEGIN {
-  if (!(Repo = ENVIRON["REPO"])) die("Must set REPO env. var.!")
+  if (!(Repo = ENVIRON["REPO"]))
+    usage()
+  if (!(BOOK = ENVIRON["BOOK"]))
+    print "will use BOOK=" (BOOK = "book")
+  printf "" > (SUMMARY = (BOOK = BOOK "/") "SUMMARY.md")
   LinkBase = "https://github.com/" Repo "/blob/main/"
   RawBase = "https://github.com/" Repo "/raw/main/"
-  printf "" > (SUMMARY = (BOOK = "book/") "SUMMARY.md")
   H = 0
   Title = Content = ""
   delete PathElements
@@ -39,7 +42,7 @@ function handleTitle(h,pass,   indent,dir,i,path,title) {
   Title = PathElements[H = h] = title
 }
 
-END { if (!Exit){ handleTitle(0, 1); pass2() } }
+END { if (!Exit) { handleTitle(0, 1); pass2() } }
 
 function pass2(   l,f,t) {
   Title = Content = ""
@@ -63,7 +66,7 @@ function pass2(   l,f,t) {
   handleTitle(0, 2)
 }
 
-function die(err) { Exit=1; print err; exit 1 }
+function usage() { Exit = 1; print "Usage:\n   REPO=username/reponame [BOOK=book_folder_path] awk -f mdbooker.awk README.md"; exit 1 }
 function linkify(t) { t = tolower(t); gsub(/ /, "-", t); gsub(/[^-a-z0-9_]/, "", t); return t }
 function fname(s) { gsub(/ /, "_", s); return s }
 function trim(s) { sub(/^[ \t\r\n]+/, "", s); sub(/[ \t\r\n]+$/, "", s); return s }
