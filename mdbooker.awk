@@ -1,5 +1,5 @@
 BEGIN {
-  Repo = ENVIRON["REPO"]
+  if (!(Repo = ENVIRON["REPO"])) die("Must set REPO env. var.!")
   LinkBase = "https://github.com/" Repo "/blob/main/"
   RawBase = "https://github.com/" Repo "/raw/main/"
   printf "" > (SUMMARY = (BOOK = "book/") "SUMMARY.md")
@@ -39,7 +39,7 @@ function handleTitle(h,pass,   indent,dir,i,path,title) {
   Title = PathElements[H = h] = title
 }
 
-END { handleTitle(0, 1); pass2() }
+END { if (!Exit){ handleTitle(0, 1); pass2() } }
 
 function pass2(   l,f,t) {
   Title = Content = ""
@@ -63,6 +63,7 @@ function pass2(   l,f,t) {
   handleTitle(0, 2)
 }
 
+function die(err) { Exit=1; print err; exit 1 }
 function linkify(t) { t = tolower(t); gsub(/ /, "-", t); gsub(/[^-a-z0-9_]/, "", t); return t }
 function fname(s) { gsub(/ /, "_", s); return s }
 function trim(s) { sub(/^[ \t\r\n]+/, "", s); sub(/[ \t\r\n]+$/, "", s); return s }
