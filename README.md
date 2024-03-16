@@ -2,7 +2,10 @@
 
 # mdbooker
 
-Converts your README.md into a documentation site (via [mdBook](https://github.com/rust-lang/mdBook))
+Converts your README.md into a documentation site (via [mdBook](https://github.com/rust-lang/mdBook)).
+
+It works by splitting README.md file into multiple .md documents based on title. 
+It also generates the SUMMARY.md.
 
 ## Demo
 
