@@ -2,7 +2,7 @@
 
 # mdbooker
 
-Converts your README.md into a documentation site (via mdbook)
+Converts your README.md into a documentation site (via [mdBook](https://github.com/rust-lang/mdBook))
 
 ## Demo
 
