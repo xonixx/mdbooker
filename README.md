@@ -7,6 +7,8 @@ Converts your README.md into a documentation site (via [mdBook](https://github.c
 It works by splitting README.md file into multiple .md documents based on title. 
 It also generates the SUMMARY.md.
 
+Article: [mdbooker – turn your README.md into a documentation site](https://maximullaris.com/mdbooker.html)
+
 ## Demo
 
 [README.md](https://github.com/xonixx/makesure) ➡ [makesure.dev](https://makesure.dev)
@@ -20,5 +22,5 @@ REPO=username/reponame [BOOK=book_folder_path] awk -f mdbooker.awk README.md
 then
 
 ```sh
-mbdook build
+mdbook build
 ```
