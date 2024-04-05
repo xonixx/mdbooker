@@ -1,3 +1,4 @@
+#!/usr/bin/awk -f
 BEGIN {
   if (!(Repo = ENVIRON["REPO"]))
     usage()
